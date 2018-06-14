@@ -479,6 +479,16 @@ This function is called at the very end of Spacemacs startup, after layer
 configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
+  (defun my-setup-indent (n)
+    ;; java/c/c++
+    (setq c-basic-offset n)
+    ;; web development
+    (setq javascript-indent-level n) ; javascript-mode
+    (setq js-indent-level n) ; js-mode
+    (setq js2-basic-offset n) ; js2-mode, in latest js2-mode, it's alias of js-indent-level
+    (setq css-indent-offset n) ; css-mode
+    )
+  (my-setup-indent 2)
   (setq all-the-icons-fileicon t)
   (setq projectile-switch-project-action 'neotree-projectile-action)
   (setq neo-theme 'icons)
