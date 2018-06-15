@@ -45,6 +45,7 @@ This function should only modify configuration layer settings."
      auto-completion
      ;; better-defaults
      emacs-lisp
+     common-lisp
      git
      markdown
      neotree
@@ -439,7 +440,7 @@ It should only modify the values of Spacemacs settings."
    dotspacemacs-icon-title-format nil
 
    ;; Delete whitespace while saving buffer. Possible values are `all'
-  ;; to aggressively delete empty line and long sequences of whitespace,
+   ;; to aggressively delete empty line and long sequences of whitespace,
    ;; `trailing' to delete only the whitespace at end of lines, `changed' to
    ;; delete only whitespace for changed lines or `nil' to disable cleanup.
    ;; (default nil)
@@ -463,7 +464,8 @@ If you are unsure, try setting them in `dotspacemacs/user-config' first."
   (setq configuration-layer-elpa-archives
         '(("melpa-cn" . "http://elpa.emacs-china.org/melpa/")
           ("org-cn"   . "http://elpa.emacs-china.org/org/")
-          ("gnu-cn"   . "http://elpa.emacs-china.org/gnu/")))
+          ("gnu-cn"   . "http://elpa.emacs-china.org/gnu/"))
+        )
   )
 
 (defun dotspacemacs/user-load ()
@@ -479,6 +481,7 @@ This function is called at the very end of Spacemacs startup, after layer
 configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
+  ;; indent
   (defun my-setup-indent (n)
     ;; java/c/c++
     (setq c-basic-offset n)
@@ -489,10 +492,15 @@ before packages are loaded."
     (setq css-indent-offset n) ; css-mode
     )
   (my-setup-indent 2)
+  ;; slime
+  (setq inferior-lisp-program "/usr/local/bin/clisp")
+  (setq slime-contribs '(slime-fancy))
+  ;; neotree
   (setq all-the-icons-fileicon t)
   (setq projectile-switch-project-action 'neotree-projectile-action)
   (setq neo-theme 'icons)
   (setq neo-window-position 'right)
+  ;; backup
   (setq make-backup-files nil)
   )
 
@@ -503,6 +511,21 @@ before packages are loaded."
 This is an auto-generated function, do not modify its content directly, use
 Emacs customize menu instead.
 This function is called at the very end of Spacemacs initialization."
+  (custom-set-variables
+   ;; custom-set-variables was added by Custom.
+   ;; If you edit it by hand, you could mess it up, so be careful.
+   ;; Your init file should contain only one such instance.
+   ;; If there is more than one, they won't work right.
+   '(package-selected-packages
+     (quote
+      (slime-company slime common-lisp-snippets unfill mwim all-the-icons-dired insert-shebang flycheck-bashate fish-mode company-shell godoctor go-tag go-rename go-guru go-eldoc company-go go-mode yaml-mode yasnippet-snippets helm-company helm-c-yasnippet fuzzy company-tern dash-functional company-statistics auto-yasnippet ac-ispell auto-complete orgit org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-mime org-download org-brain htmlize gnuplot evil-org smeargle mmm-mode markdown-toc markdown-mode magit-gitflow helm-gitignore gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md evil-magit magit magit-popup git-commit ghub with-editor xterm-color shell-pop multi-term eshell-z eshell-prompt-extras esh-help json-navigator hierarchy json-mode json-snatcher json-reformat ws-butler winum which-key web-beautify volatile-highlights vi-tilde-fringe uuidgen use-package toc-org tern symon string-inflection spaceline-all-the-icons restart-emacs request rainbow-delimiters popwin persp-mode pcre2el password-generator paradox overseer org-plus-contrib org-bullets open-junk-file neotree nameless move-text macrostep lsp-javascript-typescript lorem-ipsum livid-mode linum-relative link-hint js2-refactor js-doc indent-guide impatient-mode hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation helm-xref helm-themes helm-swoop helm-purpose helm-projectile helm-mode-manager helm-make helm-gtags helm-flx helm-descbinds helm-ag google-translate golden-ratio ggtags font-lock+ flycheck flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-cleverparens evil-args evil-anzu eval-sexp-fu elisp-slime-nav editorconfig dumb-jump doom-themes diminish define-word counsel-projectile counsel-gtags company column-enforce-mode clean-aindent-mode centered-cursor-mode auto-highlight-symbol auto-compile aggressive-indent add-node-modules-path adaptive-wrap ace-window ace-link ace-jump-helm-line))))
+  (custom-set-faces
+   ;; custom-set-faces was added by Custom.
+   ;; If you edit it by hand, you could mess it up, so be careful.
+   ;; Your init file should contain only one such instance.
+   ;; If there is more than one, they won't work right.
+   )
+  )
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -510,11 +533,10 @@ This function is called at the very end of Spacemacs initialization."
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (unfill mwim all-the-icons-dired insert-shebang flycheck-bashate fish-mode company-shell godoctor go-tag go-rename go-guru go-eldoc company-go go-mode yaml-mode yasnippet-snippets helm-company helm-c-yasnippet fuzzy company-tern dash-functional company-statistics auto-yasnippet ac-ispell auto-complete orgit org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-mime org-download org-brain htmlize gnuplot evil-org smeargle mmm-mode markdown-toc markdown-mode magit-gitflow helm-gitignore gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md evil-magit magit magit-popup git-commit ghub with-editor xterm-color shell-pop multi-term eshell-z eshell-prompt-extras esh-help json-navigator hierarchy json-mode json-snatcher json-reformat ws-butler winum which-key web-beautify volatile-highlights vi-tilde-fringe uuidgen use-package toc-org tern symon string-inflection spaceline-all-the-icons restart-emacs request rainbow-delimiters popwin persp-mode pcre2el password-generator paradox overseer org-plus-contrib org-bullets open-junk-file neotree nameless move-text macrostep lsp-javascript-typescript lorem-ipsum livid-mode linum-relative link-hint js2-refactor js-doc indent-guide impatient-mode hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation helm-xref helm-themes helm-swoop helm-purpose helm-projectile helm-mode-manager helm-make helm-gtags helm-flx helm-descbinds helm-ag google-translate golden-ratio ggtags font-lock+ flycheck flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-cleverparens evil-args evil-anzu eval-sexp-fu elisp-slime-nav editorconfig dumb-jump doom-themes diminish define-word counsel-projectile counsel-gtags company column-enforce-mode clean-aindent-mode centered-cursor-mode auto-highlight-symbol auto-compile aggressive-indent add-node-modules-path adaptive-wrap ace-window ace-link ace-jump-helm-line))))
+    (yaml-mode xterm-color ws-butler winum which-key web-beautify volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline smeargle slime-company slime doom-nord-theme shell-pop restart-emacs rainbow-delimiters popwin persp-mode pcre2el paradox orgit org-projectile org-present org-pomodoro org-mime org-download org-bullets open-junk-file neotree multi-term move-text mmm-mode markdown-toc magit-gitflow macrostep lorem-ipsum livid-mode linum-relative link-hint json-mode js2-refactor js-doc insert-shebang indent-guide hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers highlight-indentation helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-gtags helm-gitignore helm-flx helm-descbinds helm-company helm-c-yasnippet helm-ag google-translate golden-ratio go-guru go-eldoc gnuplot gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md ggtags fuzzy flx-ido fish-mode fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu eshell-z eshell-prompt-extras esh-help elisp-slime-nav dumb-jump doom-themes diminish define-word company-tern company-statistics company-shell company-go common-lisp-snippets column-enforce-mode coffee-mode clean-aindent-mode bind-key auto-yasnippet auto-highlight-symbol auto-compile aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
-)
